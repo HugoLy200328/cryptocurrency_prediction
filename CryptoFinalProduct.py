@@ -1,4 +1,3 @@
-import random
 import datetime as dt
 import streamlit as st
 import yfinance as yf
@@ -7,6 +6,7 @@ import plotly.express as px
 import xgboost as xgb
 import seaborn as sns
 import sklearn
+
 # from sklearn.metrics import mean_squared_error, mean_absolute_error
 # from sklearn.model_selection import train_test_split
 
@@ -34,23 +34,13 @@ eth_data = None
 # Define function to generate ETH dataset
 
 
-def train_test_split(X, y, test_size=0.2, shuffle=False, random_state=None):
-    if shuffle:
-        if random_state is not None:
-            random.seed(random_state)
-
-        data = list(zip(X, y))
-        random.shuffle(data)
-        X_shuffled, y_shuffled = zip(*data)
-    else:
-        X_shuffled, y_shuffled = X, y
-
+def train_test_split(X, y, test_size=0.2, random_state=None):
+    X_shuffled, y_shuffled = X, y
     split_index = int(len(X) * (1 - test_size))
     X_train = X_shuffled[:split_index]
     X_test = X_shuffled[split_index:]
     y_train = y_shuffled[:split_index]
     y_test = y_shuffled[split_index:]
-
     return X_train, X_test, y_train, y_test
 
 
@@ -86,7 +76,7 @@ def process_dataset(eth_data):
 
     # Split the data into training and testing sets
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, shuffle=False)
+        X, y, test_size=0.2)
 
     # Creating XGBoost train and test data
     dtrain = xgb.DMatrix(X_train.values, label=y_train.values)
