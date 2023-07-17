@@ -5,6 +5,7 @@ import pandas as pd
 import plotly.express as px
 import xgboost as xgb
 import seaborn as sns
+import sklearn
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
