@@ -6,10 +6,8 @@ import plotly.express as px
 import xgboost as xgb
 import seaborn as sns
 import sklearn
-from sklearn.metrics import mean_squared_error, mean_absolute_error
-from sklearn.preprocessing import MinMaxScaler
+# from sklearn.metrics import mean_squared_error, mean_absolute_error
 from sklearn.model_selection import train_test_split
-import plotly.graph_objects as go
 
 
 # Set the page title
@@ -102,12 +100,6 @@ def predict_on_testing_dataset(xgb_model, dtest, y_test):
     prediction = xgb_model.predict(dtest)
     # Convert dataframe to an array for plotting graphs purposes
     y_test_transformed = y_test.values
-    xgb_mse = mean_squared_error(prediction, y_test)
-    xgb_mae = mean_absolute_error(prediction, y_test)
-    xgb_rmse = mean_squared_error(prediction, y_test, squared=False)
-    st.text(f"MSE: {xgb_mse/1000000}")
-    st.text(f"MAE: {xgb_mae/1000}")
-    st.text(f"RMSE: {xgb_rmse/1000}")
     return prediction, y_test_transformed
 
 # Predict days
@@ -118,12 +110,6 @@ def predict_lastest_days(xgb_model, dtest, y_test):
     prediction = xgb_model.predict(dtest)
     # Convert dataframe to an array for plotting graphs purposes
     y_test_transformed = y_test.values
-    xgb_mse = mean_squared_error(prediction, y_test)
-    xgb_mae = mean_absolute_error(prediction, y_test)
-    xgb_rmse = mean_squared_error(prediction, y_test, squared=False)
-    st.text(f"MSE: {xgb_mse/1000000}")
-    st.text(f"MAE: {xgb_mae/1000}")
-    st.text(f"RMSE: {xgb_rmse/1000}")
     return prediction, y_test_transformed
 
 
