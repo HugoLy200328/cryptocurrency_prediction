@@ -1,3 +1,4 @@
+import random
 import datetime as dt
 import streamlit as st
 import yfinance as yf
@@ -7,7 +8,7 @@ import xgboost as xgb
 import seaborn as sns
 import sklearn
 # from sklearn.metrics import mean_squared_error, mean_absolute_error
-from sklearn.model_selection import train_test_split
+# from sklearn.model_selection import train_test_split
 
 
 # Set the page title
@@ -31,6 +32,23 @@ st.sidebar.write(' The Team:\n'
 eth_data = None
 
 # Define function to generate ETH dataset
+
+
+def train_test_split(X, y, test_size=0.2, random_state=None):
+    if random_state is not None:
+        random.seed(random_state)
+
+    data = list(zip(X, y))
+    random.shuffle(data)
+    X_shuffled, y_shuffled = zip(*data)
+
+    split_index = int(len(X) * (1 - test_size))
+    X_train = X_shuffled[:split_index]
+    X_test = X_shuffled[split_index:]
+    y_train = y_shuffled[:split_index]
+    y_test = y_shuffled[split_index:]
+
+    return X_train, X_test, y_train, y_test
 
 
 def generate_eth_dataset():
