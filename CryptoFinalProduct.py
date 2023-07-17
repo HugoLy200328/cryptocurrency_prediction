@@ -34,13 +34,16 @@ eth_data = None
 # Define function to generate ETH dataset
 
 
-def train_test_split(X, y, test_size=0.2, random_state=None):
-    if random_state is not None:
-        random.seed(random_state)
+def train_test_split(X, y, test_size=0.2, shuffle=False, random_state=None):
+    if shuffle:
+        if random_state is not None:
+            random.seed(random_state)
 
-    data = list(zip(X, y))
-    random.shuffle(data)
-    X_shuffled, y_shuffled = zip(*data)
+        data = list(zip(X, y))
+        random.shuffle(data)
+        X_shuffled, y_shuffled = zip(*data)
+    else:
+        X_shuffled, y_shuffled = X, y
 
     split_index = int(len(X) * (1 - test_size))
     X_train = X_shuffled[:split_index]
