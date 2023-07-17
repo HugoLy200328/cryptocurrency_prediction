@@ -4,7 +4,6 @@ import yfinance as yf
 import pandas as pd
 import plotly.express as px
 import xgboost as xgb
-import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 from sklearn.preprocessing import MinMaxScaler
